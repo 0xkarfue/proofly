@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id            String   @id @default(cuid())
+  walletAddress String   @unique
+  email         String?  @unique
+  username      String?  @unique
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  commitments   Commitment[]
+  
+  // Cached stats (for performance)
+  totalCommitments     Int   @default(0)
+  completedCommitments Int   @default(0)
+  failedCommitments    Int   @default(0)
+  successRate          Float @default(0.0)
+  
+  @@map("users")
+}
+
+
+model Commitment {
+  id          String   @id @default(cuid())
+  
+  // Blockchain references
+  pdaAddress  String   @unique
+  txSignature String   @unique
+  
+  // User relationship
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Commitment details (mirrored from blockchain)
+  description String
+  stakeAmount Float    // in SOL
+  type        CommitmentType
+  deadline    DateTime
+  isFulfilled Boolean  @default(false)
+  isClaimed   Boolean  @default(false)
+  
+  // Friends (for Pool type)
+  friends     Json?    // Array of wallet addresses
+  
+  // Metadata (not on blockchain)
+  category    String?  // "fitness", "learning", "productivity", etc.
+  isPublic    Boolean  @default(true)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  fulfilledAt DateTime?
+  claimedAt   DateTime?
+  
+  @@index([userId])
+  @@index([deadline])
+  @@index([isFulfilled])
+  @@index([type])
+  @@map("commitments")
+}
+
+enum CommitmentType {
+  STAKE  // Locks for 10 years
+  POOL   // Distributes to friends
+}
+
+
