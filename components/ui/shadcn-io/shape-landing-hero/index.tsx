@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Circle } from "lucide-react";
 // import { cn } from "@repo/shadcn-ui/lib/utils";
 import { cn } from "@/lib/utils";
-import { ElegantNavbar } from "@/components/nav";
+import { ElegantNavbar } from "@/components/layout/nav";
 
 type ElegantShapeProps = {
   className?: string;

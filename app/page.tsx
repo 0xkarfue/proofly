@@ -1,5 +1,5 @@
-import { ElegantNavbar } from "@/components/nav";
-import { BubbleBackground } from "@/components/ui/shadcn-io/bubble-background";
+import { ElegantNavbar } from "@/components/layout/nav";
+// import { BubbleBackground } from "@/components/ui/shadcn-io/bubble-background";
 import { HeroGeometric } from "@/components/ui/shadcn-io/shape-landing-hero";
 import { div } from "framer-motion/client";
 import Image from "next/image";

@@ -3,8 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers/Providers";
 import "@solana/wallet-adapter-react-ui/styles.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { ElegantNavbar } from "@/components/nav";
+import { ElegantNavbar } from "@/components/layout/nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,10 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          {/* <Navbar /> */}
-          <ElegantNavbar
-                  logo="Proofly"
-                />
+          <ElegantNavbar />
           {children}
         </Providers>
       </body>
