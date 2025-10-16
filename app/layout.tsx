@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/providers/Providers";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { Navbar } from "@/components/layout/Navbar";
+import { ElegantNavbar } from "@/components/nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <Navbar />
+          {/* <Navbar /> */}
+          <ElegantNavbar
+                  logo="Proofly"
+                />
           {children}
         </Providers>
       </body>
