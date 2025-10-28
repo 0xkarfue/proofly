@@ -55,9 +55,8 @@ export function ElegantNavbar() {
           >
 
             <Link
-              href="/commitment/create"
-              className="text-white/70 hover:text-white transition-colors duration-200"
-            >
+              href="/dashboard"
+              className="text-white/70 hover:text-white transition-colors duration-200">
               Create
             </Link>
           </motion.div>
